@@ -200,7 +200,16 @@ class InicioSesionScreen(Screen):
 
     def build_ui(self):
         self.clear_widgets()
-        
+    
+           #--Limpiar inputs en pantalla
+    def limpiar_inputs(self):
+        for widget in self.walk():
+            if isinstance(widget, TextInput):
+                widget.text = ""
+                
+    def on_pre_enter(self, *args):
+        self.limpiar_inputs()
+          
         # Layout principal con ScrollView
         scroll_view = ScrollView(
             size_hint=(1, 1),
@@ -287,7 +296,11 @@ class InicioSesionScreen(Screen):
         correo_label.bind(size=correo_label.setter('text_size'))
         correo_layout.add_widget(correo_label)
         
-        self.correo_input = RoundedTextInput(hint_text='usuario@ejemplo.com')
+        self.correo_input = RoundedTextInput(
+            hint_text='usuario@ejemplo.com',
+            multiline=False,
+            write_tab=False
+            )
         correo_layout.add_widget(self.correo_input)
         campos_layout.add_widget(correo_layout)
 
@@ -310,7 +323,13 @@ class InicioSesionScreen(Screen):
         contraseña_label.bind(size=contraseña_label.setter('text_size'))
         contraseña_layout.add_widget(contraseña_label)
         
-        self.contraseña_input = RoundedTextInput(hint_text='********', password=True)
+        self.contraseña_input = RoundedTextInput(
+            hint_text='********', 
+            password=True,
+            multiline=False,
+            write_tab=False
+            )
+        
         contraseña_layout.add_widget(self.contraseña_input)
         campos_layout.add_widget(contraseña_layout)
 

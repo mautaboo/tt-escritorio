@@ -320,10 +320,13 @@ class RegistroScreen(Screen):
                 valign='middle'
             )
             campo_layout.add_widget(label)
-
+            
+        #Cambio al comportamiento del tabulador de el enter
             input_field = RoundedTextInput(
                 hint_text=hint_text,
                 password=password,
+                multiline=False,
+                write_tab=False,
                 size_hint_y=None,
                 size_hint_x=1,
                 height=dp(55)
@@ -610,7 +613,7 @@ class RegistroScreen(Screen):
         password = self.contraseña_input.text
 
         # Expresión regular para validar la contraseña
-        patron = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!?\-_.]).{8,}$'
+        patron = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-@#$%&!?_.]).{8,}$'
 
         if not re.match(patron, password):
             self.mostrar_mensaje(
